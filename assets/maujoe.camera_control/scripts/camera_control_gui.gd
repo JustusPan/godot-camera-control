@@ -95,6 +95,14 @@ func _ready():
 		btn_zoom_pivot.set_pressed(camera.zoom_pivot)
 		btn_zoom_pivot.connect("toggled",self,"_on_btn_zoom_pivot_toggled")
 		
+		var lbl_zoom_sensitivity = Label.new()
+		lbl_zoom_sensitivity.set_text("Zoom Sensitivity")
+
+		var zoom_sensitivity = HScrollBar.new()
+		zoom_sensitivity.set_max(1)
+		zoom_sensitivity.set_value(camera.zoom_sensitivity)
+		zoom_sensitivity.connect("value_changed",self,"_on_hsb_zoom_sensitivity_value_changed")
+		
 		var btn_rot_privot = CheckButton.new()
 		btn_rot_privot.set_text("Rotate Privot")
 		btn_rot_privot.set_toggle_mode(true)
@@ -174,6 +182,8 @@ func _ready():
 		container.add_child(lbl_privot)
 		container.add_child(privot)
 		container.add_child(btn_zoom_pivot)
+		container.add_child(lbl_zoom_sensitivity)
+		container.add_child(zoom_sensitivity)
 		container.add_child(btn_rot_privot)
 		container.add_child(lbl_distance)
 		container.add_child(distance)
@@ -275,6 +285,9 @@ func _on_opt_privot_item_selected(id):
 
 func _on_btn_zoom_pivot_toggled(pressed):
 	camera.zoom_pivot = pressed
+
+func _on_hsb_zoom_sensitivity_value_changed(value):
+	camera.zoom_sensitivity = value
 
 func _on_btn_rot_privot_toggled(pressed):
 	camera.rotate_privot = pressed

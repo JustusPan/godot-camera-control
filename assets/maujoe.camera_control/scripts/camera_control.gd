@@ -14,7 +14,8 @@ export (float, 0.0, 1.0) var sensitivity = 0.5
 export (float, 0.0, 0.999, 0.001) var smoothness = 0.5 setget set_smoothness
 export(NodePath) var privot setget set_privot
 export var distance = 5.0 setget set_distance
-export var zoom_pivot = false
+export var zoom_pivot = true
+export (float, 0.0, 1.0) var zoom_sensitivity = 0.2
 export var rotate_privot = false
 export var collisions = true setget set_collisions
 export (int, 0, 360) var yaw_limit = 360
@@ -94,10 +95,10 @@ func _input(event):
 		if event is InputEventMouseButton and event.is_pressed():
 			# zoom in
 			if event.button_index == BUTTON_WHEEL_UP:
-				self.distance -= 5
+				self.distance -= 5 * zoom_sensitivity
 			# zoom out
 			if event.button_index == BUTTON_WHEEL_DOWN:
-				self.distance += 5
+				self.distance += 5 * zoom_sensitivity
 
 func _process(delta):
 	if privot:
