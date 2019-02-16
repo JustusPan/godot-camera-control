@@ -89,6 +89,12 @@ func _ready():
 		privot.connect("item_selected",self,"_on_opt_privot_item_selected")
 		privot.connect("pressed",self,"_on_opt_privot_pressed")
 
+		var btn_zoom_pivot = CheckButton.new()
+		btn_zoom_pivot.set_text("Zoom Pivot")
+		btn_zoom_pivot.set_toggle_mode(true)
+		btn_zoom_pivot.set_pressed(camera.zoom_pivot)
+		btn_zoom_pivot.connect("toggled",self,"_on_btn_zoom_pivot_toggled")
+		
 		var btn_rot_privot = CheckButton.new()
 		btn_rot_privot.set_text("Rotate Privot")
 		btn_rot_privot.set_toggle_mode(true)
@@ -167,6 +173,7 @@ func _ready():
 		container.add_child(smoothness)
 		container.add_child(lbl_privot)
 		container.add_child(privot)
+		container.add_child(btn_zoom_pivot)
 		container.add_child(btn_rot_privot)
 		container.add_child(lbl_distance)
 		container.add_child(distance)
@@ -265,6 +272,9 @@ func _on_opt_privot_item_selected(id):
 	else:
 		camera.privot = null
 	privot.select(id)
+
+func _on_btn_zoom_pivot_toggled(pressed):
+	camera.zoom_pivot = pressed
 
 func _on_btn_rot_privot_toggled(pressed):
 	camera.rotate_privot = pressed
